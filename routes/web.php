@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\categoryController;
+use App\Http\Controllers\transactionController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('/category')->group(function () {
+    Route::get('/food-beverage', [categoryController::class,'foodBeverage']);
+    Route::get('/beauty-health', [categoryController::class, 'beautyHealth']);
+    Route::get('/home-care', [categoryController::class, 'homeCare']);
+    Route::get('/baby-kid', [categoryController::class, 'babyKid']);
+});
+
+Route::get('/id/{id?}/name/{name?}', [userController::class, 'userInfo'])->name('profile');
+
+Route::get('/transaction', [transactionController::class, 'transac']);
